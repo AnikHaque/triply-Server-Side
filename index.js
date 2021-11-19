@@ -86,6 +86,9 @@ app.post('/orders', async(req,res)=>{
 app.get('/', (req, res) => {
   res.send('This is our node project')
 })
+app.get('/hello', (req, res) => {
+  res.send('This is hello');
+})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
