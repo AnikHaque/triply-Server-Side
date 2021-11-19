@@ -4,21 +4,16 @@ const ObjectId = require('mongodb').ObjectId;
 const cors = require('cors');
 require('dotenv').config();
 
-const app = express()
-const port = process.env.PORT || 5000
+const app = express();
+const port = process.env.PORT || 5000;
 
 // middleware 
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
 
-
-// user: tourbooking
-// pass: RzqrpJQwkfVqFCpo
-
-
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.pr0er.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const uri =`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.pr0er.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 console.log(uri);
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(uri,{ useNewUrlParser: true, useUnifiedTopology: true });
 
 async function run() {
     try {
@@ -27,7 +22,7 @@ async function run() {
       const servicesCollection = database.collection("services");
       const orderCollection = database.collection("orders");
 
-    //   get api 
+    
     // get api for all services
 app.get('/services', async(req,res)=>{
     const cursor = servicesCollection.find({});
@@ -71,13 +66,14 @@ app.post('/orders', async(req,res)=>{
   });
 
  // test 
-// app.get('/myOrders/:email', async(req,res)=>{
-//     const result = await orderCollection.find({email:req.params.email}).toArray();
-//      res.send(result);
+ app.get('/myOrders/:email', async(req,res)=>{
+     const result = await orderCollection.find({email:req.params.email}).toArray();
+      res.send(result);
   
-//   });
+   });
     
-    } finally {
+    } 
+    finally {
      
     }
   }
