@@ -21,6 +21,7 @@ async function run() {
       const database = client.db("tourBooking");
       const servicesCollection = database.collection("services");
       const orderCollection = database.collection("orders");
+      const userCollection = database.collection("users");
 
     
     // get api for all services
@@ -55,7 +56,7 @@ app.get('/services/:id', async(req,res)=>{
         res.json(result);
     })
 
-    // post api for ordering products 
+    // post api for ordering  
 app.post('/orders', async(req,res)=>{
     const item = req.body;
     console.log('hit the post api again',item);
@@ -64,6 +65,14 @@ app.post('/orders', async(req,res)=>{
      res.json(result)
   
   });
+
+  // post all the users info 
+app.post('/users', async(req,res)=>{
+    const user = req.body;
+    const result = await userCollection.insertOne(user);
+    console.log(result);
+    res.json(result);
+  })
 
  // test 
  app.get('/myOrders/:email', async(req,res)=>{
